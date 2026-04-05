@@ -1,0 +1,12 @@
+woundos.db
+__pycache__/
+*.py[cod]
+*.pyo
+.pytest_cache/
+uploads/
+*.egg-info/
+dist/
+build/
+.env
+.venv/
+venv/
