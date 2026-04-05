@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CarePlix WoundOS</title>
+  <link rel="stylesheet" href="/css/styles.css" />
+</head>
+<body>
+  <!-- ─── Header ─────────────────────────────────────────────────── -->
+  <header>
+    <div class="header-brand">
+      <span class="logo-icon">⚕</span>
+      <span class="brand-name">CarePlix <strong>WoundOS</strong></span>
+    </div>
+    <nav>
+      <button class="nav-btn active" data-section="dashboard">Dashboard</button>
+      <button class="nav-btn" data-section="patients">Patients</button>
+      <button class="nav-btn" data-section="wounds">Wounds</button>
+      <button class="nav-btn" data-section="assessments">Assessments</button>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ─── Dashboard ───────────────────────────────────────────── -->
+    <section id="dashboard" class="section active">
+      <h2>Dashboard</h2>
+      <div class="stats-grid" id="stats-grid">
+        <div class="stat-card">
+          <div class="stat-number" id="stat-patients">–</div>
+          <div class="stat-label">Patients</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number" id="stat-wounds">–</div>
+          <div class="stat-label">Active Wounds</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number" id="stat-assessments">–</div>
+          <div class="stat-label">Assessments</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Recent Patients</h3>
+        <table id="recent-patients-table">
+          <thead><tr><th>MRN</th><th>Name</th><th>DOB</th><th>Gender</th><th>Actions</th></tr></thead>
+          <tbody id="recent-patients-body"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ─── Patients ─────────────────────────────────────────────── -->
+    <section id="patients" class="section">
+      <div class="section-header">
+        <h2>Patients</h2>
+        <button class="btn btn-primary" id="btn-new-patient">+ New Patient</button>
+      </div>
+
+      <!-- Patient Form -->
+      <div class="card form-card" id="patient-form-card" style="display:none;">
+        <h3 id="patient-form-title">Register Patient</h3>
+        <form id="patient-form">
+          <input type="hidden" id="patient-id" />
+          <div class="form-grid">
+            <label>First Name *<input type="text" id="p-first-name" required /></label>
+            <label>Last Name *<input type="text" id="p-last-name" required /></label>
+            <label>Date of Birth *<input type="date" id="p-dob" required /></label>
+            <label>Gender *
+              <select id="p-gender" required>
+                <option value="">Select…</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+              </select>
+            </label>
+            <label>MRN<input type="text" id="p-mrn" /></label>
+            <label>Phone<input type="tel" id="p-phone" /></label>
+            <label>Email<input type="email" id="p-email" /></label>
+          </div>
+          <label>Address<textarea id="p-address" rows="2"></textarea></label>
+          <label>Medical History<textarea id="p-medical-history" rows="3"></textarea></label>
+          <label>Allergies<textarea id="p-allergies" rows="2"></textarea></label>
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Save</button>
+            <button type="button" class="btn btn-secondary" id="btn-cancel-patient">Cancel</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="card">
+        <input type="search" id="patient-search" placeholder="Search by name or MRN…" />
+        <table id="patients-table">
+          <thead><tr><th>MRN</th><th>Name</th><th>DOB</th><th>Gender</th><th>Actions</th></tr></thead>
+          <tbody id="patients-body"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ─── Wounds ───────────────────────────────────────────────── -->
+    <section id="wounds" class="section">
+      <div class="section-header">
+        <h2>Wounds</h2>
+        <button class="btn btn-primary" id="btn-new-wound">+ New Wound</button>
+      </div>
+
+      <div class="card form-card" id="wound-form-card" style="display:none;">
+        <h3>Record Wound</h3>
+        <form id="wound-form">
+          <div class="form-grid">
+            <label>Patient *
+              <select id="w-patient" required></select>
+            </label>
+            <label>Wound Type *
+              <select id="w-type" required>
+                <option value="">Select…</option>
+                <option value="pressure_ulcer">Pressure Ulcer</option>
+                <option value="diabetic_foot">Diabetic Foot</option>
+                <option value="venous_leg">Venous Leg</option>
+                <option value="arterial">Arterial</option>
+                <option value="surgical">Surgical</option>
+                <option value="traumatic">Traumatic</option>
+                <option value="burn">Burn</option>
+                <option value="other">Other</option>
+              </select>
+            </label>
+            <label>Location *<input type="text" id="w-location" required placeholder="e.g. Left heel" /></label>
+            <label>Stage
+              <select id="w-stage">
+                <option value="">Unknown</option>
+                <option value="stage_1">Stage 1</option>
+                <option value="stage_2">Stage 2</option>
+                <option value="stage_3">Stage 3</option>
+                <option value="stage_4">Stage 4</option>
+                <option value="unstageable">Unstageable</option>
+                <option value="deep_tissue">Deep Tissue</option>
+              </select>
+            </label>
+          </div>
+          <label>Description<textarea id="w-description" rows="3"></textarea></label>
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Save</button>
+            <button type="button" class="btn btn-secondary" id="btn-cancel-wound">Cancel</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="card">
+        <table id="wounds-table">
+          <thead><tr><th>Patient</th><th>Type</th><th>Location</th><th>Stage</th><th>Created</th><th>Actions</th></tr></thead>
+          <tbody id="wounds-body"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ─── Assessments ──────────────────────────────────────────── -->
+    <section id="assessments" class="section">
+      <div class="section-header">
+        <h2>Assessments</h2>
+        <button class="btn btn-primary" id="btn-new-assessment">+ New Assessment</button>
+      </div>
+
+      <div class="card form-card" id="assessment-form-card" style="display:none;">
+        <h3>Wound Assessment</h3>
+        <form id="assessment-form" enctype="multipart/form-data">
+          <div class="form-grid">
+            <label>Wound *
+              <select id="a-wound" required></select>
+            </label>
+            <label>Clinician *<input type="text" id="a-clinician" required /></label>
+            <label>Length (cm)<input type="number" id="a-length" step="0.1" min="0" /></label>
+            <label>Width (cm)<input type="number" id="a-width" step="0.1" min="0" /></label>
+            <label>Depth (cm)<input type="number" id="a-depth" step="0.1" min="0" /></label>
+            <label>Area (cm²)<input type="number" id="a-area" step="0.01" min="0" /></label>
+            <label>Wound Bed<input type="text" id="a-wound-bed" placeholder="e.g. granulation, slough" /></label>
+            <label>Exudate Amount
+              <select id="a-exudate-amount">
+                <option value="">Select…</option>
+                <option value="none">None</option>
+                <option value="minimal">Minimal</option>
+                <option value="moderate">Moderate</option>
+                <option value="heavy">Heavy</option>
+              </select>
+            </label>
+            <label>Exudate Type<input type="text" id="a-exudate-type" placeholder="e.g. serous, purulent" /></label>
+            <label>Wound Edges<input type="text" id="a-wound-edges" placeholder="e.g. irregular, rolled" /></label>
+            <label>Periwound Skin<input type="text" id="a-periwound" placeholder="e.g. macerated, intact" /></label>
+            <label>Odor
+              <select id="a-odor">
+                <option value="">Select…</option>
+                <option value="none">None</option>
+                <option value="mild">Mild</option>
+                <option value="moderate">Moderate</option>
+                <option value="strong">Strong</option>
+              </select>
+            </label>
+            <label>Pain Score (0–10)<input type="number" id="a-pain" min="0" max="10" /></label>
+            <label>Healing Status
+              <select id="a-healing-status">
+                <option value="">Select…</option>
+                <option value="improving">Improving</option>
+                <option value="stable">Stable</option>
+                <option value="deteriorating">Deteriorating</option>
+                <option value="healed">Healed</option>
+              </select>
+            </label>
+          </div>
+          <label>Notes<textarea id="a-notes" rows="3"></textarea></label>
+          <label>Treatment Plan<textarea id="a-treatment-plan" rows="3"></textarea></label>
+          <label>Wound Image
+            <input type="file" id="a-image" accept="image/jpeg,image/png,image/webp" />
+          </label>
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Save Assessment</button>
+            <button type="button" class="btn btn-secondary" id="btn-cancel-assessment">Cancel</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Progress Report -->
+      <div class="card" id="report-card" style="display:none;">
+        <h3>Healing Progress Report</h3>
+        <div id="report-content"></div>
+      </div>
+
+      <div class="card">
+        <table id="assessments-table">
+          <thead>
+            <tr>
+              <th>Date</th><th>Wound</th><th>Clinician</th>
+              <th>Area (cm²)</th><th>Status</th><th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="assessments-body"></tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ─── Toast ───────────────────────────────────────────────────── -->
+  <div id="toast" class="toast"></div>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/app.js"></script>
+</body>
+</html>
